@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - command: ansible-galaxy install {{ item }} <% "-p #{input('location')}" if input('location').present? %>
+      register: out
+      with_items:
+        - <%= input('ansible_roles_list') %>
+    - debug: var=out
